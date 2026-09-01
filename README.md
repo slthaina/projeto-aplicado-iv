@@ -1,4 +1,4 @@
-# O Clima Já Está Deixando uma Marca? Detectando Mudanças na Dinâmica Temporal de Arboviroses e sua Associação com Variáveis Climáticas em Municípios Brasileiros
+# O clima já está deixando uma marca? Detectando mudanças na dinâmica temporal de arboviroses e sua associação com variáveis climáticas em municípios brasileiros
 
 **Projeto Aplicado IV — Ciência de Dados EaD — 2026/02**
 
