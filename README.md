@@ -1,6 +1,7 @@
 # O clima já está deixando uma marca? Detectando mudanças na dinâmica temporal de arboviroses e sua associação com variáveis climáticas em municípios brasileiros
 
 **Projeto Aplicado IV — Tecnologia em Ciência de Dados — 2026.2**
+Professor Gustavo Scalabrini Sampaio
 
 **ODS relacionada:** ODS 11 — Cidades e Comunidades Sustentáveis
 
@@ -25,8 +26,6 @@ Dengue, zika e chikungunya compartilham o vetor urbano *Aedes aegypti* (Diptera:
 Há indícios preliminares de mudanças na distribuição espacial da ocorrência notificada dessas doenças no Brasil: indicadores do próprio sistema InfoDengue já registraram aumento da atividade epidemiológica da dengue em latitudes mais altas, incluindo a região Sul do país (FIOCRUZ, 2022). Essa evidência observacional indica uma mudança na distribuição geográfica dos casos notificados, mas não permite, isoladamente, estabelecer uma relação causal com o clima. Esse tipo de evidência motiva a investigação sistemática, em série temporal, de como o padrão sazonal de cada arbovirose se comporta ao longo dos anos e se variações nesse padrão apresentam associação temporal com a variação das condições climáticas nos mesmos municípios.
 
 Este projeto está inserido na interseção entre Entomologia, Ecologia de Vetores, Climatologia, Epidemiologia e Ciência de Dados, com foco na análise de séries temporais de dengue, zika e chikungunya, buscando caracterizar mudanças na dinâmica epidemiológica dessas arboviroses e investigar sua associação com a variação temporal das condições climáticas.
-
-## 1.2 Motivação
 
 ## 1.2 Motivação
 
