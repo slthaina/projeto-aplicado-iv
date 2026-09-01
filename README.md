@@ -40,8 +40,6 @@ Do ponto de vista da gestão pública, identificar mudanças nos padrões tempor
 
 ## 1.3 Perguntas de pesquisa
 
-## 1.3 Perguntas de pesquisa
-
 O projeto é organizado em torno de duas perguntas de pesquisa:
 
 **RQ1 (núcleo científico).** Os municípios selecionados apresentam mudanças no início, na duração ou na intensidade das temporadas de dengue, zika e chikungunya ao longo da série histórica disponível?
@@ -85,7 +83,6 @@ O produto integra dados epidemiológicos e climáticos em uma ferramenta de aná
 A análise de mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento de ações de vigilância e prevenção em saúde pública. O projeto está alinhado à ODS 11, Cidades e Comunidades Sustentáveis, especialmente à Meta 11.b, relacionada ao planejamento e à implementação de políticas voltadas à adaptação e à resiliência diante de riscos ambientais e climáticos. A proposta também apresenta relação com os ODS 3, Saúde e Bem-Estar, e 13, Ação Climática.
 
 O produto possui caráter analítico e não substitui sistemas oficiais de vigilância ou produz diagnósticos epidemiológicos. Seu objetivo é demonstrar a aplicação de Ciência de Dados na análise de padrões temporais e de sua relação com variáveis climáticas.
-
 
 # 3. Público-alvo e cliente
 
@@ -164,7 +161,6 @@ Serão priorizados municípios que apresentem:
 Também serão considerados municípios de interesse epidemiológico que apresentem baixa atividade histórica e mudanças recentes na ocorrência das arboviroses. Quando pertinente, serão priorizados municípios localizados em regiões nas quais tenham sido descritas mudanças recentes na distribuição da ocorrência das doenças.
 
 A seleção definitiva será realizada após a etapa exploratória dos dados.
-
 
 # 6. Solução proposta
 
