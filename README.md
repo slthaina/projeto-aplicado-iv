@@ -36,7 +36,6 @@ A extensão da série histórica possibilita investigar padrões que não seriam
 
 Do ponto de vista da gestão pública, identificar mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento das ações de vigilância e prevenção, especialmente em municípios nos quais a dinâmica epidemiológica vem se modificando ao longo do tempo.
 
----
 
 ## 1.3 Perguntas de pesquisa
 
@@ -83,6 +82,8 @@ O produto integra dados epidemiológicos e climáticos em uma ferramenta de aná
 A análise de mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento de ações de vigilância e prevenção em saúde pública. O projeto está alinhado à ODS 11, Cidades e Comunidades Sustentáveis, especialmente à Meta 11.b, relacionada ao planejamento e à implementação de políticas voltadas à adaptação e à resiliência diante de riscos ambientais e climáticos. A proposta também apresenta relação com os ODS 3, Saúde e Bem-Estar, e 13, Ação Climática.
 
 O produto possui caráter analítico e não substitui sistemas oficiais de vigilância ou produz diagnósticos epidemiológicos. Seu objetivo é demonstrar a aplicação de Ciência de Dados na análise de padrões temporais e de sua relação com variáveis climáticas.
+
+---
 
 # 3. Público-alvo e cliente
 
@@ -144,6 +145,8 @@ A unidade temporal principal será a semana epidemiológica. Será utilizado o m
 
 O InfoDengue será utilizado como fonte climática principal. O INMET será consultado quando houver ausência de variáveis relevantes, inconsistências ou necessidade de validação de informações climáticas.
 
+---
+
 # 5. Seleção dos municípios
 
 A análise será inicialmente conduzida em três municípios, podendo ser ampliada para até cinco conforme a disponibilidade dos dados, a complexidade computacional e o cronograma do projeto.
@@ -161,6 +164,8 @@ Serão priorizados municípios que apresentem:
 Também serão considerados municípios de interesse epidemiológico que apresentem baixa atividade histórica e mudanças recentes na ocorrência das arboviroses. Quando pertinente, serão priorizados municípios localizados em regiões nas quais tenham sido descritas mudanças recentes na distribuição da ocorrência das doenças.
 
 A seleção definitiva será realizada após a etapa exploratória dos dados.
+
+---
 
 # 6. Solução proposta
 
@@ -220,7 +225,6 @@ Momento aproximado da mudança
 Comparação com variáveis climáticas no mesmo período
         ↓
 Avaliação de associação temporal (não causal)
-```
 
 ## 6.3 Etapa 3 — Associação com variáveis climáticas (análise complementar)
 
@@ -253,6 +257,8 @@ As métricas principais serão **MAE** e **RMSE**, com **sMAPE** como medida com
 Os pontos de mudança identificados pelo PELT serão avaliados com base nos critérios do método e quanto à estabilidade e plausibilidade temporal, considerando, quando disponíveis, informações epidemiológicas e literatura sobre os períodos analisados (KILLICK; FEARNHEAD; ECKLEY, 2012).
 
 A interpretação dos resultados será restrita à identificação de padrões e associações, sem atribuição automática de causalidade.
+
+---
 
 # 8. Detecção de comportamentos atípicos
 
@@ -294,8 +300,6 @@ O projeto será considerado concluído quando:
 * código-fonte e documentação estiverem disponíveis publicamente no GitHub.
 
 ---
-
-# 11. Produto final
 
 # 11. Produto final
 
