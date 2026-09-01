@@ -9,7 +9,7 @@
 ## Equipe
 
 | Nome          | Matrícula     | Função no projeto |
-| ------------- | ------------- | ----------------- |
+| ---------------------------- | ------------- | ----------------- |
 | *Thainá Silva Leite*         | *10730503* | *Coordenação e desenvolvimento integral do projeto: pesquisa, coleta e tratamento de dados, análise, modelagem, desenvolvimento do produto, documentação e apresentação.*     |
 
 ---
@@ -400,7 +400,6 @@ PLOS NEGLECTED TROPICAL DISEASES. **Phenotypic variation in populations of the m
 
 ORGANIZAÇÃO DAS NAÇÕES UNIDAS (ONU). **Objetivos de Desenvolvimento Sustentável — ODS 11: Cidades e Comunidades Sustentáveis**. Disponível em: https://www.undp.org/sustainable-development-goals. Acesso em: 1 set. 2026.
 
-> **Nota**: recomenda-se revisão final das referências com uma ferramenta de formatação ABNT (ex. Mendeley/Zotero com estilo ABNT NBR 6023) antes da entrega definitiva. As referências metodológicas (PELT, STL, XGBoost, SARIMAX) foram adicionadas nesta revisão e devem ser confirmadas quanto a edição/páginas exatas antes da entrega final.
 
 ---
 
