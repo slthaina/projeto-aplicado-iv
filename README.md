@@ -10,11 +10,7 @@
 
 | Nome          | Matrícula     | Função no projeto |
 | ------------- | ------------- | ----------------- |
-| *(preencher)* | *(preencher)* | *(preencher)*     |
-| *(preencher)* | *(preencher)* | *(preencher)*     |
-| *(preencher)* | *(preencher)* | *(preencher)*     |
-| *(preencher)* | *(preencher)* | *(preencher)*     |
-| *(preencher)* | *(preencher)* | *(preencher)*     |
+| *Thainá Silva Leite* | *10730503* | *Coordenação e desenvolvimento integral do projeto: pesquisa, coleta e tratamento de dados, análise, modelagem, desenvolvimento do produto, documentação e apresentação.*     |
 
 ---
 
