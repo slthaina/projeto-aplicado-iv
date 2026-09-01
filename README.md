@@ -18,91 +18,80 @@
 
 ## 1.1 Contexto
 
-Em 2024, a dengue atingiu níveis de transmissão sem precedentes no mundo: segundo o relatório *Dengue: global situation, surveillance and progress – 2024 update*, publicado pela Organização Mundial da Saúde (OMS/WHO Weekly Epidemiological Record), foram notificados 14.434.584 casos em todas as seis regiões da organização, o maior volume global já registrado. O Brasil concentrou a maior parte desse total, com mais de 10 milhões de casos reportados e 6.321 óbitos — o maior número de casos de dengue reportados por um único país no mundo em 2024, em um cenário de recorde histórico global da doença. O Brasil concentra, portanto, uma parcela expressiva da carga global de dengue e apresenta, adicionalmente, importante circulação de outras arboviroses urbanas transmitidas pelo mesmo vetor, como chikungunya e zika.
+Em 2024, a dengue alcançou níveis elevados de ocorrência em escala global: segundo o relatório *Dengue: global situation, surveillance and progress – 2024 update*, publicado pela Organização Mundial da Saúde (OMS, 2025), foram notificados 14.434.584 casos em todas as seis regiões da organização, o maior volume de casos notificados já registrado pela OMS em um único ano. O Brasil concentrou a maior parte desse total, com mais de 10 milhões de casos notificados e 6.321 óbitos registrados, constituindo o país com o maior número de casos notificados de dengue em 2024 (OMS, 2025). O Brasil concentra, portanto, uma parcela expressiva da carga global de casos notificados de dengue e apresenta, adicionalmente, importante circulação de outras arboviroses urbanas transmitidas pelo mesmo vetor, como chikungunya e zika.
 
-Dengue, zika e chikungunya compartilham o vetor urbano *Aedes aegypti* (Diptera: Culicidae), mas são causadas por patógenos distintos. Estudos mecanísticos indicam diferenças nas relações entre temperatura e potencial de transmissão entre os diferentes sistemas vetor-vírus, com eficiência de transmissão concentrada em uma faixa térmica intermediária (aproximadamente 18°C a 34°C, com pico próximo de 26–29°C, segundo modelos publicados na literatura). Se essas diferenças mecanísticas, observadas em condições controladas, também se manifestam nos dados de vigilância de campo ao longo de mais de uma década é uma questão ainda pouco explorada — e é exatamente essa lacuna que o projeto propõe investigar empiricamente, sem presumir a resposta a priori.
+Dengue, zika e chikungunya compartilham o vetor urbano *Aedes aegypti* (Diptera: Culicidae), mas são causadas por patógenos distintos. Estudos mecanísticos indicam que a temperatura exerce influência sobre o potencial de transmissão dos diferentes sistemas *Aedes*-vírus, com respostas térmicas que podem apresentar faixas distintas de maior adequação à transmissão dos patógenos (MORDECAI et al., 2017). Se os padrões identificados a partir de modelos mecanísticos e dados laboratoriais também se refletem nos dados de vigilância de campo ao longo de mais de uma década permanece uma questão pouco explorada. Essa lacuna motiva a investigação da dinâmica temporal dessas arboviroses e de sua associação com as condições climáticas observadas nos municípios brasileiros.
 
-Há indícios preliminares de que a dinâmica espaço-temporal dessas doenças no Brasil vem se modificando: indicadores do próprio sistema InfoDengue já registraram expansão recente da ocorrência de dengue para latitudes mais altas, incluindo a região Sul do país. Esse tipo de evidência observacional motiva a investigação sistemática, em série temporal, de como o padrão sazonal de cada arbovirose vem se comportando ao longo dos anos, e se essa evolução apresenta associação temporal com o comportamento das variáveis climáticas nos mesmos municípios — sem que isso implique, por si só, uma relação de causalidade direta e comprovada.
+Há indícios preliminares de mudanças na distribuição espacial da ocorrência notificada dessas doenças no Brasil: indicadores do próprio sistema InfoDengue já registraram aumento da atividade epidemiológica da dengue em latitudes mais altas, incluindo a região Sul do país (FIOCRUZ, 2022). Essa evidência observacional indica uma mudança na distribuição geográfica dos casos notificados, mas não permite, isoladamente, estabelecer uma relação causal com o clima. Esse tipo de evidência motiva a investigação sistemática, em série temporal, de como o padrão sazonal de cada arbovirose se comporta ao longo dos anos e se variações nesse padrão apresentam associação temporal com a variação das condições climáticas nos mesmos municípios.
 
-Este projeto está inserido na interseção entre **Entomologia, Ecologia de Vetores, Climatologia, Epidemiologia e Ciência de Dados**, com foco na caracterização, em série temporal, de possíveis mudanças na dinâmica de transmissão de arboviroses e sua associação com variáveis climáticas — e não na previsão pontual de casos futuros como objetivo central. A proposta mantém uma conexão conceitual (não metodológica) com estudos de vulnerabilidade climática de Diptera: assim como traços funcionais de uma espécie podem estar associados à sua resposta a variações climáticas, a sensibilidade térmica de cada arbovirose, documentada pela literatura mecanística, pode estar associada a diferenças na forma como sua dinâmica temporal se comporta frente a um regime climático em transformação.
+Este projeto está inserido na interseção entre Entomologia, Ecologia de Vetores, Climatologia, Epidemiologia e Ciência de Dados, com foco na análise de séries temporais de dengue, zika e chikungunya, buscando caracterizar mudanças na dinâmica epidemiológica dessas arboviroses e investigar sua associação com a variação temporal das condições climáticas.
 
 ## 1.2 Motivação
 
-A maior parte das aplicações de Ciência de Dados sobre o InfoDengue foca exclusivamente na previsão de curto prazo — quantos casos ocorrerão nas próximas semanas. Esse é um problema relevante e será também tratado neste projeto, mas de forma complementar: a proposta busca explorar uma dimensão temporal de mais longo prazo, menos enfatizada em aplicações de previsão operacional, capaz de captar tendências e possíveis pontos de mudança na dinâmica sazonal das arboviroses ao longo dos anos.
+## 1.2 Motivação
 
-O InfoDengue disponibiliza dados epidemiológicos e ambientais organizados por município e semana epidemiológica desde aproximadamente 2010, cobrindo dengue, zika e chikungunya. A atualização contínua da plataforma e o uso de *nowcasting* — sistema que corrige estatisticamente o atraso natural entre a ocorrência de um caso e sua notificação completa no sistema oficial — tornam a fonte particularmente adequada para aplicações de monitoramento e previsão temporal, distinguindo-a de uma base estática pré-processada. Como os valores de `casos_est` são estimativas produzidas por esse sistema de nowcasting e podem sofrer revisões retrospectivas à medida que novas notificações são incorporadas, esses valores serão tratados, ao longo do projeto, como **estimativas dinâmicas da incidência**, e não como contagens observacionais definitivas — uma distinção metodológica relevante para a interpretação dos resultados.
+O InfoDengue constitui uma importante fonte de dados para o monitoramento das arboviroses no Brasil, reunindo informações epidemiológicas e ambientais por município e semana epidemiológica. A plataforma utiliza técnicas de *nowcasting* para estimar casos ainda não registrados no sistema de notificação, permitindo acompanhar a evolução temporal de dengue, chikungunya e zika (INFO DENGUE, 2026).
 
-Esse volume histórico de mais de uma década de observações semanais por município é o que viabiliza a análise de tendência de longo prazo e a detecção de possíveis pontos de mudança propostas neste projeto — algo que uma janela temporal mais curta não permitiria de forma confiável.
+A extensão da série histórica possibilita investigar padrões que não seriam identificados em períodos mais curtos, como mudanças na sazonalidade, na intensidade e no período de ocorrência das arboviroses. Como a variável `casos_est` corresponde a estimativas produzidas pelo *nowcasting* e pode ser revisada retrospectivamente à medida que novas notificações são incorporadas, esses valores serão tratados como estimativas dinâmicas da incidência, e não como contagens observacionais definitivas (INFO DENGUE, 2026).
 
-Do ponto de vista da gestão pública, uma ferramenta capaz de mostrar não apenas "quantos casos teremos semana que vem", mas também se o padrão sazonal de uma doença já mudou nos últimos anos, tem valor estratégico complementar para o planejamento de médio prazo de secretarias municipais de saúde — especialmente em municípios que historicamente registravam baixa atividade epidemiológica dessas doenças.
+Do ponto de vista da gestão pública, identificar mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento das ações de vigilância e prevenção, especialmente em municípios nos quais a dinâmica epidemiológica vem se modificando ao longo do tempo.
 
 ---
 
 ## 1.3 Perguntas de pesquisa
 
-Em vez de uma única pergunta, o projeto é organizado em torno de três perguntas de pesquisa complementares, que também definem a hierarquia de prioridades do trabalho:
+## 1.3 Perguntas de pesquisa
 
-**RQ1 (núcleo científico).** Os municípios selecionados apresentam alterações persistentes no início, na duração ou na intensidade das temporadas de dengue, zika e chikungunya ao longo da série histórica disponível?
+O projeto é organizado em torno de duas perguntas de pesquisa:
 
-**RQ2 (análise complementar).** Essas alterações, quando identificadas, apresentam associação temporal com mudanças observadas nas condições climáticas locais?
+**RQ1 (núcleo científico).** Os municípios selecionados apresentam mudanças no início, na duração ou na intensidade das temporadas de dengue, zika e chikungunya ao longo da série histórica disponível?
 
-**RQ3 (aplicação).** Modelos estatísticos e de aprendizado de máquina conseguem prever a incidência de curto prazo dessas arboviroses com desempenho satisfatório, a partir de informações epidemiológicas e climáticas disponíveis até a semana corrente?
+**RQ2 (relação com o clima).** As mudanças identificadas na dinâmica temporal das arboviroses apresentam associação com a variação temporal das condições climáticas locais?
 
-O projeto **não pretende estabelecer causalidade** entre mudanças climáticas e comportamento epidemiológico, mas investigar se alterações persistentes nos padrões temporais das arboviroses apresentam associação consistente com mudanças observadas nas condições climáticas.
+As análises propostas investigam associações entre a dinâmica epidemiológica das arboviroses e as condições climáticas, sem estabelecer, por si só, relações de causalidade.
 
 ---
 
 ## 1.4 Objetivo geral
 
-Desenvolver um produto analítico baseado em séries temporais capaz de **caracterizar mudanças na dinâmica sazonal de dengue, zika e chikungunya em municípios brasileiros selecionados, investigar sua associação com variáveis climáticas, e produzir previsões de curto prazo como aplicação complementar de apoio à vigilância**.
+Desenvolver um produto analítico baseado em séries temporais para caracterizar mudanças na dinâmica sazonal de dengue, zika e chikungunya em municípios brasileiros selecionados e investigar sua associação com a variação temporal das condições climáticas locais.
 
 ## 1.5 Objetivos específicos
 
-1. Construir séries temporais semanais de incidência estimada de dengue, zika e chikungunya para municípios brasileiros selecionados, incluindo ao menos um município classificado como "sentinela" segundo os critérios definidos na Seção 5.
+1. Construir e integrar séries temporais semanais de dengue, zika e chikungunya e variáveis climáticas para os municípios brasileiros selecionados, utilizando dados do InfoDengue e, quando necessário, fontes complementares.
 
-2. Integrar os dados epidemiológicos do InfoDengue com variáveis climáticas disponíveis na própria plataforma e, quando necessário, com dados complementares do INMET.
+2. Caracterizar a dinâmica sazonal das arboviroses por meio de indicadores de início, pico, fim, duração e intensidade das temporadas, identificando tendências e possíveis pontos de mudança ao longo da série histórica.
 
-3. Construir indicadores quantitativos de sazonalidade (início, pico, fim, duração e intensidade da temporada) para cada série, conforme definido na Seção 6.2.
+3. Investigar a associação entre as mudanças identificadas na dinâmica temporal das arboviroses e a variação das condições climáticas nos municípios analisados, considerando diferentes defasagens temporais quando pertinentes.
 
-4. Decompor cada série temporal em tendência, sazonalidade e resíduo, e aplicar um método de detecção de pontos de mudança sobre a série dessazonalizada.
-
-5. Investigar a associação temporal entre as mudanças identificadas e o comportamento das variáveis climáticas no mesmo período, respeitando a distinção entre associação e causalidade.
-
-6. Desenvolver um modelo estatístico de referência (SARIMAX) para previsão de curto prazo (1 a 4 semanas) da incidência.
-
-7. Desenvolver um modelo de aprendizado de máquina (XGBoost) para o mesmo problema de previsão, e comparar seu desempenho com o modelo estatístico por meio de validação temporal.
-
-8. Identificar semanas em que a incidência observada apresente comportamento atípico em relação ao padrão esperado pelo modelo.
-
-9. Desenvolver um painel analítico que apresente, para cada município e doença, tanto a caracterização histórica e as mudanças identificadas quanto as previsões de curto prazo.
+4. Desenvolver um produto analítico que sintetize os padrões históricos, as mudanças identificadas e suas associações com as condições climáticas, permitindo a exploração dos resultados por município e arbovirose.
 
 ---
 
-# 2. Justificativa
+## 2. Justificativa
 
 O projeto apresenta contribuições científicas, tecnológicas e sociais.
 
-### Contribuição científica
+#### Contribuição científica
 
-A proposta busca explorar uma dimensão temporal de longo prazo que é menos enfatizada em aplicações de previsão operacional de curto prazo, investigando de forma comparativa como três arboviroses transmitidas pelo mesmo vetor — mas com diferenças mecanísticas de sensibilidade térmica documentadas na literatura — se comportam ao longo de mais de uma década de dados observacionais reais. O projeto constitui uma aplicação de Ciência de Dados a um problema de ecologia de vetores, estabelecendo uma conexão temática (não metodológica) com o estudo da influência das condições ambientais sobre características funcionais de Diptera.
+O InfoDengue tem sido utilizado em estudos de monitoramento e previsão de arboviroses, especialmente em análises de curto prazo (CODEÇO et al., 2018). Este projeto amplia essa perspectiva ao investigar mudanças na dinâmica temporal de dengue, zika e chikungunya ao longo de uma série histórica de mais de uma década e sua associação com variáveis climáticas. A comparação entre as três arboviroses permite avaliar se esses padrões apresentam comportamentos distintos ao longo do tempo.
 
-### Contribuição tecnológica
+#### Contribuição tecnológica
 
-O diferencial do produto não está apenas na existência de um painel interativo, mas na integração, em uma única ferramenta, de quatro camadas de análise normalmente tratadas de forma isolada: histórico de longo prazo, mudança estrutural, associação climática e previsão de curto prazo.
+O produto integra dados epidemiológicos e climáticos em uma ferramenta de análise de séries temporais, permitindo visualizar padrões sazonais, possíveis mudanças na dinâmica das arboviroses e sua associação com as condições climáticas (Lowe *et al*., 2021). O código e a documentação do projeto serão disponibilizados publicamente para favorecer sua reprodutibilidade (Peng, 2011; Wilkinson *et al*., 2016).
 
-### Contribuição social
+#### Contribuição social
 
-A disponibilização pública do código, da documentação e dos resultados contribuirá para o caráter extensionista da disciplina. A aplicação possui relação direta com o **ODS 11 — Cidades e Comunidades Sustentáveis**, em particular com a Meta 11.b, referente ao aumento do número de cidades com estratégias de gestão de risco e adaptação às mudanças climáticas: municípios que apresentam expansão epidemiológica recente de arboviroses ilustram, de forma concreta, a necessidade de adaptação do planejamento de saúde pública a riscos que antes não faziam parte de sua realidade. O tema também guarda relação com o ODS 3 (Saúde e Bem-Estar) e o ODS 13 (Ação contra a Mudança Global do Clima); como a disciplina exige vínculo com uma das ODS 8, 11 ou 16, o projeto adota a **ODS 11 como ODS principal**.
+A análise de mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento de ações de vigilância e prevenção em saúde pública. O projeto está alinhado à **ODS 11, Cidades e Comunidades Sustentáveis**, especialmente à Meta 11.b, relacionada ao planejamento e à implementação de políticas voltadas à adaptação e à resiliência diante de riscos ambientais e climáticos. A proposta também apresenta relação com os ODS 3, Saúde e Bem-Estar, e 13, Ação Climática.
 
-O produto não terá como finalidade substituir sistemas oficiais de vigilância ou produzir diagnósticos epidemiológicos, mas sim demonstrar como técnicas de Ciência de Dados podem apoiar a interpretação de tendências de longo prazo e de possíveis mudanças no padrão de risco.
+O produto possui caráter analítico e não substitui sistemas oficiais de vigilância ou produz diagnósticos epidemiológicos. Seu objetivo é demonstrar a aplicação de Ciência de Dados na análise de padrões temporais e de sua relação com variáveis climáticas.
 
----
 
 # 3. Público-alvo e cliente
 
-O usuário primário do produto é a **vigilância epidemiológica municipal** — profissionais responsáveis pelo monitoramento de arboviroses em Secretarias Municipais de Saúde. O usuário secundário são **pesquisadores e estudantes** interessados em séries temporais epidemiológicas e ambientais, o que também orienta decisões de design (ex. disponibilizar uma camada técnica detalhada além da visão executiva).
+O público-alvo principal do produto são profissionais da vigilância epidemiológica municipal, especialmente aqueles envolvidos no monitoramento de arboviroses nas Secretarias Municipais de Saúde. Como público secundário, consideram-se pesquisadores e estudantes interessados na análise de séries temporais epidemiológicas e ambientais.
 
-O produto será desenvolvido considerando como cliente potencial uma **Secretaria Municipal de Saúde**, especialmente o setor responsável pela vigilância epidemiológica. Trata-se, nesta fase, de uma personificação do público-alvo utilizada para orientar o design do produto — a equipe buscará, na medida do possível, validar essa perspectiva com um interlocutor real ou com a literatura sobre necessidades de vigilância municipal, sem que isso seja pré-condição para a conclusão do projeto.
+O cliente potencial é uma Secretaria Municipal de Saúde, com foco no setor de vigilância epidemiológica. Essa definição orientará as funcionalidades e a apresentação dos resultados, priorizando informações que possam apoiar a análise da dinâmica temporal das arboviroses e sua relação com as condições climáticas. Sempre que possível, essa perspectiva será confrontada com necessidades identificadas na literatura e com contribuições de profissionais da área.
 
 ### Requisitos funcionais do produto
 
@@ -368,38 +357,45 @@ Serão disponibilizados publicamente:
 
 # 14. Referências
 
-CODECO, C.; COELHO, F. C.; CRUZ, O. G.; OLIVEIRA, S. B.; CASTRO, T. G.; BASTOS, L. S. **Infodengue: a nowcasting system for the surveillance of arboviruses in Brazil**. Revue d'Épidémiologie et de Santé Publique, v. 66, supl. 5, p. S386, out. 2018. Disponível em: https://doi.org/10.1016/j.respe.2018.05.408. Acesso em: 1 set. 2026.
+## Referências
 
-CODECO, C. T. et al. **InfoDengue: a nowcasting system for the surveillance of dengue fever transmission**. bioRxiv, 2016. Disponível em: https://www.biorxiv.org/content/10.1101/046193. Acesso em: 1 set. 2026.
+CHEN, T.; GUESTRIN, C. XGBoost: a scalable tree boosting system. In: **PROCEEDINGS OF THE 22ND ACM SIGKDD INTERNATIONAL CONFERENCE ON KNOWLEDGE DISCOVERY AND DATA MINING**, 2016. p. 785-794.
 
-FIOCRUZ. **Monitoramento de dengue indica pontos de atenção no Brasil**. Agência Fiocruz de Notícias, 2022. Disponível em: https://agencia.fiocruz.br/monitoramento-de-dengue-indica-pontos-de-atencao-no-brasil. Acesso em: 1 set. 2026.
+CLEVELAND, R. B.; CLEVELAND, W. S.; MCRAE, J. E.; TERPENNING, I. STL: a seasonal-trend decomposition procedure based on loess. **Journal of Official Statistics**, v. 6, n. 1, p. 3-73, 1990.
 
-FGV EMAp. **FGV e Fiocruz monitoram avanço da dengue no Brasil**. 2024. Disponível em: https://emap.fgv.br/en/news/fgv-and-fiocruz-monitor-spread-dengue-fever-brazil. Acesso em: 1 set. 2026.
+CODEÇO, C. T. et al. InfoDengue: a nowcasting system for the surveillance of dengue fever transmission. **bioRxiv**, 2016. Disponível em: https://www.biorxiv.org/content/10.1101/046193. Acesso em: 25 ago. 2026.
 
-INFODENGUE. **Sobre nós**. Disponível em: https://info.dengue.mat.br/informacoes/. Acesso em: 1 set. 2026.
+CODEÇO, C.; COELHO, F. C.; CRUZ, O. G.; OLIVEIRA, S. B.; CASTRO, T. G.; BASTOS, L. S. InfoDengue: a nowcasting system for the surveillance of arboviruses in Brazil. **Revue d'Épidémiologie et de Santé Publique**, v. 66, supl. 5, p. S386, out. 2018. Disponível em: https://doi.org/10.1016/j.respe.2018.05.408. Acesso em: 25 ago. 2026.
 
-INSTITUTO NACIONAL DE METEOROLOGIA (INMET). **Banco de Dados Meteorológicos para Ensino e Pesquisa**. Disponível em: https://portal.inmet.gov.br/dadoshistoricos. Acesso em: 1 set. 2026.
+FGV EMAP. **FGV e Fiocruz monitoram avanço da dengue no Brasil**. 2024. Disponível em: https://emap.fgv.br/en/news/fgv-and-fiocruz-monitor-spread-dengue-fever-brazil. Acesso em: 25 ago. 2026.
 
-KILLICK, R.; FEARNHEAD, P.; ECKLEY, I. A. **Optimal detection of changepoints with a linear computational cost**. Journal of the American Statistical Association, v. 107, n. 500, p. 1590-1598, 2012. (Referência do método PELT.)
+FIOCRUZ. **Monitoramento de dengue indica pontos de atenção no Brasil**. Agência Fiocruz de Notícias, 2022. Disponível em: https://agencia.fiocruz.br/monitoramento-de-dengue-indica-pontos-de-atencao-brasil. Acesso em: 25 ago. 2026.
 
-MORDECAI, E. A.; COHEN, J. M.; EVANS, M. V.; GUDAPATI, P.; JOHNSON, L. R.; LIPPI, C. A. et al. **Detecting the impact of temperature on transmission of Zika, dengue, and chikungunya using mechanistic models**. PLOS Neglected Tropical Diseases, v. 11, n. 4, e0005568, 2017. Disponível em: https://doi.org/10.1371/journal.pntd.0005568. Acesso em: 1 set. 2026.
+HYNDMAN, R. J.; ATHANASOPOULOS, G. **Forecasting: principles and practice**. 3. ed. Melbourne: OTexts, 2021. Disponível em: https://otexts.com/fpp3/. Acesso em: 25 ago. 2026.
 
-MORDECAI, E. A. et al. **Thermal biology of mosquito-borne disease**. Ecology Letters, v. 22, n. 10, p. 1690-1708, 2019.
+INFODENGUE. **Sobre nós**. [S. l.], [s. d.]. Disponível em: https://info.dengue.mat.br/informacoes/. Acesso em: 25 ago. 2026.
 
-CHEN, T.; GUESTRIN, C. **XGBoost: A scalable tree boosting system**. In: Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 2016, p. 785-794. (Referência metodológica para XGBoost.)
+INSTITUTO NACIONAL DE METEOROLOGIA (INMET). **Banco de Dados Meteorológicos para Ensino e Pesquisa**. [S. l.], [s. d.]. Disponível em: https://portal.inmet.gov.br/dadoshistoricos. Acesso em: 25 ago. 2026.
 
-HYNDMAN, R. J.; ATHANASOPOULOS, G. **Forecasting: principles and practice**. 3. ed. Melbourne: OTexts, 2021. Disponível em: https://otexts.com/fpp3/. Acesso em: 1 set. 2026. (Referência metodológica para SARIMA/SARIMAX, decomposição STL e validação temporal.)
+KILLICK, R.; FEARNHEAD, P.; ECKLEY, I. A. Optimal detection of changepoints with a linear computational cost. **Journal of the American Statistical Association**, v. 107, n. 500, p. 1590-1598, 2012.
 
-CLEVELAND, R. B.; CLEVELAND, W. S.; MCRAE, J. E.; TERPENNING, I. **STL: A seasonal-trend decomposition procedure based on loess**. Journal of Official Statistics, v. 6, n. 1, p. 3-73, 1990. (Referência metodológica para decomposição STL.)
+LOWE, R. et al. Combined effects of hydrometeorological hazards and urbanisation on dengue risk in Brazil: a spatiotemporal modelling study. **The Lancet Planetary Health**, v. 5, n. 4, p. e209-e219, 2021.
 
-ORGANIZAÇÃO MUNDIAL DA SAÚDE (OMS/WHO). **Dengue: global situation, surveillance and progress – 2024 update**. Weekly Epidemiological Record, 2025. Disponível em: https://www.who.int/publications/i/item/who-wer10052-665-678. Acesso em: 1 set. 2026.
+MORDECAI, E. A.; COHEN, J. M.; EVANS, M. V.; GUDAPATI, P.; JOHNSON, L. R.; LIPPI, C. A. et al. Detecting the impact of temperature on transmission of Zika, dengue, and chikungunya using mechanistic models. **PLOS Neglected Tropical Diseases**, v. 11, n. 4, e0005568, 2017. Disponível em: https://doi.org/10.1371/journal.pntd.0005568. Acesso em: 25 ago. 2026.
 
-PLOS NEGLECTED TROPICAL DISEASES. **Seasonal temperature variation influences climate suitability for dengue, chikungunya, and Zika transmission**. PLOS Neglected Tropical Diseases, v. 12, n. 4, e0006451, 2018. Disponível em: https://doi.org/10.1371/journal.pntd.0006451. Acesso em: 1 set. 2026.
+MORDECAI, E. A. et al. Thermal biology of mosquito-borne disease. **Ecology Letters**, v. 22, n. 10, p. 1690-1708, 2019.
 
-PLOS NEGLECTED TROPICAL DISEASES. **Phenotypic variation in populations of the mosquito vector, Aedes aegypti, and implications for predicting the effects of temperature and climate change on dengue transmission**. PLOS Neglected Tropical Diseases, v. 19, 2025. Disponível em: https://doi.org/10.1371/journal.pntd.0013623. Acesso em: 1 set. 2026.
+ORGANIZAÇÃO DAS NAÇÕES UNIDAS (ONU). **Objetivos de Desenvolvimento Sustentável: ODS 11: cidades e comunidades sustentáveis**. [S. l.], [s. d.]. Disponível em: https://www.undp.org/sustainable-development-goals. Acesso em: 25 ago. 2026.
 
-ORGANIZAÇÃO DAS NAÇÕES UNIDAS (ONU). **Objetivos de Desenvolvimento Sustentável — ODS 11: Cidades e Comunidades Sustentáveis**. Disponível em: https://www.undp.org/sustainable-development-goals. Acesso em: 1 set. 2026.
+ORGANIZAÇÃO MUNDIAL DA SAÚDE (OMS). **Dengue: global situation, surveillance and progress: 2024 update**. **Weekly Epidemiological Record**, 2025. Disponível em: https://www.who.int/publications/i/item/who-wer10052-665-678. Acesso em: 25 ago. 2026.
 
+PENG, R. D. Reproducible research in computational science. **Science**, v. 334, n. 6060, p. 1226-1227, 2011.
+
+PLOS NEGLECTED TROPICAL DISEASES. **Phenotypic variation in populations of the mosquito vector, Aedes aegypti, and implications for predicting the effects of temperature and climate change on dengue transmission**. **PLOS Neglected Tropical Diseases**, v. 19, 2025. Disponível em: https://doi.org/10.1371/journal.pntd.0013623. Acesso em: 25 ago. 2026.
+
+PLOS NEGLECTED TROPICAL DISEASES. **Seasonal temperature variation influences climate suitability for dengue, chikungunya, and Zika transmission**. **PLOS Neglected Tropical Diseases**, v. 12, n. 4, e0006451, 2018. Disponível em: https://doi.org/10.1371/journal.pntd.0006451. Acesso em: 25 ago. 2026.
+
+WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. **Scientific Data**, v. 3, n. 1, p. 160018, 2016.
 
 ---
 
