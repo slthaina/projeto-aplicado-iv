@@ -1,12 +1,12 @@
 # O clima já está deixando uma marca? Detectando mudanças na dinâmica temporal de arboviroses e sua associação com variáveis climáticas em municípios brasileiros
 
-**Projeto Aplicado IV — Ciência de Dados EaD — 2026/02**
+**Projeto Aplicado IV — Tecnologia em Ciência de Dados — 2026.2**
 
 **ODS relacionada:** ODS 11 — Cidades e Comunidades Sustentáveis
 
 ---
 
-## Equipe
+## Autoria e desenvolvimento
 
 | Nome          | Matrícula     | Função no projeto |
 | ---------------------------- | ------------- | ----------------- |
