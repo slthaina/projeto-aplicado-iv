@@ -82,7 +82,7 @@ O produto integra dados epidemiológicos e climáticos em uma ferramenta de aná
 
 #### Contribuição social
 
-A análise de mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento de ações de vigilância e prevenção em saúde pública. O projeto está alinhado à **ODS 11, Cidades e Comunidades Sustentáveis**, especialmente à Meta 11.b, relacionada ao planejamento e à implementação de políticas voltadas à adaptação e à resiliência diante de riscos ambientais e climáticos. A proposta também apresenta relação com os ODS 3, Saúde e Bem-Estar, e 13, Ação Climática.
+A análise de mudanças nos padrões temporais das arboviroses pode contribuir para o planejamento de ações de vigilância e prevenção em saúde pública. O projeto está alinhado à ODS 11, Cidades e Comunidades Sustentáveis, especialmente à Meta 11.b, relacionada ao planejamento e à implementação de políticas voltadas à adaptação e à resiliência diante de riscos ambientais e climáticos. A proposta também apresenta relação com os ODS 3, Saúde e Bem-Estar, e 13, Ação Climática.
 
 O produto possui caráter analítico e não substitui sistemas oficiais de vigilância ou produz diagnósticos epidemiológicos. Seu objetivo é demonstrar a aplicação de Ciência de Dados na análise de padrões temporais e de sua relação com variáveis climáticas.
 
@@ -109,7 +109,7 @@ O cliente potencial é uma Secretaria Municipal de Saúde, com foco no setor de 
 
 ## 4.1 Fonte principal: InfoDengue
 
-A principal fonte de dados será o **InfoDengue**, plataforma de vigilância desenvolvida por pesquisadores da FGV/EMAp e da Fiocruz, que integra dados epidemiológicos e ambientais para o monitoramento de arboviroses no Brasil.
+A principal fonte de dados será o InfoDengue, plataforma de vigilância desenvolvida por pesquisadores da FGV/EMAp e da Fiocruz, que integra dados epidemiológicos e ambientais para o monitoramento de arboviroses no Brasil.
 
 **Volume e cobertura:** a plataforma disponibiliza dados agregados por município e semana epidemiológica, com séries históricas superiores a uma década para diversos municípios brasileiros. A cobertura efetivamente utilizável será avaliada na etapa exploratória, priorizando séries com pelo menos 8 anos de dados e completude suficiente para as análises propostas.
 
@@ -121,7 +121,7 @@ A principal fonte de dados será o **InfoDengue**, plataforma de vigilância des
 
 ### Variável de resposta
 
-A principal variável epidemiológica será a **incidência estimada**, calculada a partir de `casos_est` e da população do município. A disponibilidade e a estabilidade dessa variável serão avaliadas na etapa exploratória antes da definição final dos procedimentos analíticos.
+A principal variável epidemiológica será a incidência estimada, calculada a partir de `casos_est` e da população do município. A disponibilidade e a estabilidade dessa variável serão avaliadas na etapa exploratória antes da definição final dos procedimentos analíticos.
 
 O indicador `p_rt1`, que representa a probabilidade estimada de Rt > 1, será utilizado apenas de forma descritiva no produto, sem participação nas análises principais.
 
@@ -141,7 +141,7 @@ A seleção definitiva das variáveis será realizada após a avaliação explor
 
 ### Granularidade e período
 
-A unidade temporal principal será a **semana epidemiológica**. Será utilizado o maior período histórico disponível com qualidade e comparabilidade suficientes, priorizando séries com pelo menos 8 anos de cobertura temporal.
+A unidade temporal principal será a semana epidemiológica. Será utilizado o maior período histórico disponível com qualidade e comparabilidade suficientes, priorizando séries com pelo menos 8 anos de cobertura temporal.
 
 ## 4.2 Fonte complementar: INMET
 
@@ -149,7 +149,7 @@ O InfoDengue será utilizado como fonte climática principal. O INMET será cons
 
 # 5. Seleção dos municípios
 
-A análise será inicialmente conduzida em **três municípios**, podendo ser ampliada para até cinco conforme a disponibilidade dos dados, a complexidade computacional e o cronograma do projeto.
+A análise será inicialmente conduzida em três municípios, podendo ser ampliada para até cinco conforme a disponibilidade dos dados, a complexidade computacional e o cronograma do projeto.
 
 ### Critérios de seleção
 
@@ -177,7 +177,7 @@ Os dados serão obtidos via API do InfoDengue (para as três doenças) e, quando
 Serão realizados:
 
 * tratamento de valores ausentes, com identificação explícita de semanas sem registro;
-* **distinção entre zero casos e dado ausente** — um valor de zero casos não será automaticamente tratado como dado faltante, e valores ausentes não serão convertidos indiscriminadamente em zero;
+* distinção entre zero casos e dado ausente — um valor de zero casos não será automaticamente tratado como dado faltante, e valores ausentes não serão convertidos indiscriminadamente em zero;
 * interpolação considerada apenas para variáveis climáticas, quando justificável, e não para dados epidemiológicos;
 * padronização de datas e organização por semana epidemiológica e por ano;
 * integração entre dados epidemiológicos e climáticos;
@@ -196,7 +196,7 @@ Para cada série (município × doença × ano), serão calculados:
 * **Indicador 2 — Pico**: semana de maior incidência estimada no ano.
 * **Indicador 3 — Fim da temporada**: última semana em que a incidência permanece acima do limiar definido.
 * **Indicador 4 — Duração**: número de semanas entre início e fim da temporada.
-* **Indicador 5 — Intensidade**: calculado por meio do pico de incidência, da incidência acumulada no período e da área sob a curva da temporada — permitindo diferenciar uma temporada mais **longa** de uma temporada mais **intensa**.
+* **Indicador 5 — Intensidade**: calculado por meio do pico de incidência, da incidência acumulada no período e da área sob a curva da temporada — permitindo diferenciar uma temporada mais longa de uma temporada mais intensa.
 
 O limiar (percentil 75, mínimo de semanas consecutivas) poderá ser ajustado durante a fase exploratória caso se mostre inadequado para alguma série específica, com justificativa documentada.
 
@@ -210,7 +210,7 @@ Os indicadores de duração, intensidade e início serão comparados entre janel
 
 ### Detecção de pontos de mudança (changepoint)
 
-O *changepoint* poderá identificar alterações em média, variância, tendência ou estrutura sazonal da série. Será utilizado o método **PELT (Pruned Exact Linear Time)** como abordagem principal, por seu equilíbrio entre eficiência computacional e capacidade de detectar múltiplos pontos de mudança. A detecção será aplicada sobre a **série dessazonalizada** (após decomposição, tipicamente via STL), de modo a evitar confundir a variação sazonal anual esperada com uma mudança estrutural real no regime da série.
+O *changepoint* poderá identificar alterações em média, variância, tendência ou estrutura sazonal da série. Será utilizado o método **PELT (Pruned Exact Linear Time)** como abordagem principal, por seu equilíbrio entre eficiência computacional e capacidade de detectar múltiplos pontos de mudança. A detecção será aplicada sobre a série dessazonalizada (após decomposição, tipicamente via STL), de modo a evitar confundir a variação sazonal anual esperada com uma mudança estrutural real no regime da série.
 
 A sequência analítica seguirá a lógica abaixo, para evitar a suposição prévia de que qualquer mudança identificada é necessariamente climática:
 
@@ -237,7 +237,7 @@ Para manter o modelo parcimonioso, nem todas as variáveis climáticas disponív
 
 ## 6.4 Etapa 4 — Modelagem preditiva de curto prazo (aplicação)
 
-**Problema de previsão definido explicitamente**: prever a incidência estimada de cada arbovirose para as próximas **1 a 4 semanas**, utilizando informações disponíveis até a semana corrente (*t*).
+**Problema de previsão definido explicitamente**: prever a incidência estimada de cada arbovirose para as próximas 1 a 4 semanas, utilizando informações disponíveis até a semana corrente (*t*).
 
 Serão comparados exatamente dois modelos:
 
@@ -250,7 +250,7 @@ Não será utilizado LSTM nem qualquer modelo adicional além dos dois definidos
 
 # 7. Avaliação dos resultados
 
-Caso a etapa preditiva seja implementada, SARIMAX e XGBoost serão comparados por meio de **validação temporal em janela expansiva (*walk-forward validation*)**, utilizando apenas informações disponíveis até cada momento da previsão (HYNDMAN; ATHANASOPOULOS, 2021).
+Caso a etapa preditiva seja implementada, SARIMAX e XGBoost serão comparados por meio de validação temporal em janela expansiva (*walk-forward validation*), utilizando apenas informações disponíveis até cada momento da previsão (HYNDMAN; ATHANASOPOULOS, 2021).
 
 As métricas principais serão **MAE** e **RMSE**, com **sMAPE** como medida complementar (HYNDMAN; ATHANASOPOULOS, 2021).
 
@@ -303,7 +303,7 @@ O projeto será considerado concluído quando:
 
 # 11. Produto final
 
-O produto final será um **painel analítico interativo**, organizado nas seguintes abas:
+O produto final será um painel analítico interativo, organizado nas seguintes abas:
 
 * **Aba 1 — Visão geral:** principais resultados da análise, incluindo indicadores de sazonalidade, mudanças identificadas e associações com variáveis climáticas.
 
