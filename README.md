@@ -107,81 +107,68 @@ O cliente potencial é uma Secretaria Municipal de Saúde, com foco no setor de 
 
 # 4. Descrição da base de dados
 
-## 4.1 Fonte principal — InfoDengue
+## 4.1 Fonte principal: InfoDengue
 
-A principal fonte de dados será o **InfoDengue**, plataforma de vigilância desenvolvida por pesquisadores da Fundação Getúlio Vargas (FGV/EMAp) e da Fiocruz, com dados oficiais agregados a partir do SINAN (Sistema de Informação de Agravos de Notificação) do Ministério da Saúde.
+A principal fonte de dados será o **InfoDengue**, plataforma de vigilância desenvolvida por pesquisadores da FGV/EMAp e da Fiocruz, que integra dados epidemiológicos e ambientais para o monitoramento de arboviroses no Brasil.
 
-**Volume e cobertura**: a plataforma cobre a totalidade dos municípios brasileiros participantes do sistema (ampliado para nível nacional a partir de 2021, com apoio do Ministério da Saúde), com séries históricas semanais de mais de uma década de observações por município. O volume exato de pontos temporais efetivamente utilizável, por município e doença, será determinado após a extração exploratória inicial, priorizando séries com pelo menos 8–10 anos de cobertura temporal e completude suficiente para análise de tendência e sazonalidade — não sendo exigida continuidade de 100% dos registros.
+**Volume e cobertura:** a plataforma disponibiliza dados agregados por município e semana epidemiológica, com séries históricas superiores a uma década para diversos municípios brasileiros. A cobertura efetivamente utilizável será avaliada na etapa exploratória, priorizando séries com pelo menos 8 anos de dados e completude suficiente para as análises propostas.
 
-**Múltiplos agravos comparáveis**: a plataforma disponibiliza a mesma estrutura de dados para dengue, zika e chikungunya, permitindo a comparação entre as três doenças no mesmo município e período.
+**Múltiplos agravos:** a plataforma disponibiliza dados para dengue, zika e chikungunya, permitindo a comparação entre as três arboviroses em diferentes municípios e períodos.
 
-**Atualização e nowcasting**: o InfoDengue foi concebido como um sistema de *nowcasting*, corrigindo estatisticamente o atraso natural de notificação e gerando estimativas corrigidas (`casos_est`) atualizadas semana a semana. A atualização contínua da plataforma torna a fonte particularmente adequada para aplicações de monitoramento e previsão temporal, distinguindo-a de bases estáticas pré-processadas.
+**Nowcasting:** o InfoDengue utiliza técnicas de *nowcasting* para estimar casos ainda não registrados devido ao atraso entre ocorrência e notificação. A variável `casos_est` é atualizada retrospectivamente à medida que novas informações são incorporadas e, por isso, será tratada como uma estimativa dinâmica da incidência.
 
-**Originalidade**: por se tratar de dado governamental de vigilância agregado por uma plataforma de pesquisa (não uma base secundária tipo Kaggle), a fonte exige da equipe trabalho próprio de extração via API, tratamento e integração.
-
-**Acesso**: API pública REST (`https://info.dengue.mat.br/api/`), com consultas parametrizadas por município (código IBGE), doença e intervalo de semanas epidemiológicas.
+**Acesso:** os dados serão obtidos por meio da API pública do InfoDengue, com consultas parametrizadas por município, doença e período.
 
 ### Variável de resposta
 
-A variável principal de modelagem será a **incidência estimada** (`casos_est` ajustada pela população do município), priorizada por permitir comparação entre municípios de tamanhos diferentes. A disponibilidade e estabilidade de `casos_est` serão avaliadas na etapa exploratória antes da confirmação definitiva dessa escolha.
+A principal variável epidemiológica será a **incidência estimada**, calculada a partir de `casos_est` e da população do município. A disponibilidade e a estabilidade dessa variável serão avaliadas na etapa exploratória antes da definição final dos procedimentos analíticos.
 
-O indicador `p_rt1` (probabilidade de Rt > 1) será mantido apenas como **variável descritiva no painel**, sem uso como variável principal nos modelos preditivos ou nas análises de tendência.
+O indicador `p_rt1`, que representa a probabilidade estimada de Rt > 1, será utilizado apenas de forma descritiva no produto, sem participação nas análises principais.
 
 ### Variáveis de interesse
 
-* `casos` e `casos_est` (por doença);
-* incidência estimada (variável de resposta principal);
-* `p_rt1` (uso descritivo no painel);
-* nível de alerta (`nivel`);
-* temperatura mínima, média e máxima;
-* umidade mínima, média e máxima;
-* semana epidemiológica (`SE`) e ano;
-* município e código IBGE.
+**Variável epidemiológica:** `casos_est` e incidência estimada.
 
-A seleção definitiva das variáveis será realizada após análise exploratória da completude e qualidade dos dados, doença a doença.
+**Variáveis climáticas:** temperatura mínima, média e máxima; umidade mínima, média e máxima.
+
+**Variáveis temporais:** semana epidemiológica e ano.
+
+**Variáveis de identificação:** município e código IBGE.
+
+**Indicadores auxiliares:** `p_rt1` e nível de alerta (`nivel`).
+
+A seleção definitiva das variáveis será realizada após a avaliação exploratória da completude e qualidade dos dados.
 
 ### Granularidade e período
 
-A unidade temporal principal será a **semana epidemiológica**. Será utilizado o maior período histórico disponível com qualidade e comparabilidade suficientes, priorizando séries com pelo menos 8 a 10 anos de cobertura temporal — o período exato será definido apenas após a etapa de extração e avaliação de completude.
+A unidade temporal principal será a **semana epidemiológica**. Será utilizado o maior período histórico disponível com qualidade e comparabilidade suficientes, priorizando séries com pelo menos 8 anos de cobertura temporal.
 
----
+## 4.2 Fonte complementar: INMET
 
-## 4.2 Fonte complementar — INMET
-
-O InfoDengue será a **fonte climática principal** desde o início do projeto. O INMET será utilizado apenas caso existam variáveis climáticas ausentes na base principal, inconsistências relevantes, ou necessidade pontual de validação — reduzindo a complexidade do projeto sem impedir sua expansão posterior, caso necessário.
-
----
+O InfoDengue será utilizado como fonte climática principal. O INMET será consultado quando houver ausência de variáveis relevantes, inconsistências ou necessidade de validação de informações climáticas.
 
 # 5. Seleção dos municípios
 
-Serão selecionados **3 municípios como amostra principal**, com possibilidade de expansão para até 5 caso a análise exploratória e o cronograma da disciplina permitam. Definir 3 como suficiente garante a viabilidade do projeto mesmo em cenário de restrição de tempo.
+A análise será inicialmente conduzida em **três municípios**, podendo ser ampliada para até cinco conforme a disponibilidade dos dados, a complexidade computacional e o cronograma do projeto.
 
-### Definição operacional de "município sentinela"
+### Critérios de seleção
 
-Municípios localizados em regiões de expansão epidemiológica recente, ou historicamente caracterizados por menor atividade de arboviroses, serão tratados como **municípios sentinela** para a investigação de possíveis alterações no padrão temporal da doença — sem que isso implique qualquer afirmação sobre distribuição ou abundância do vetor, para a qual o projeto não possui dados diretos.
+Serão priorizados municípios que apresentem:
 
-Um município será considerado candidato a sentinela quando atender a pelo menos três dos seguintes critérios:
+* séries históricas com pelo menos 8 anos de cobertura;
+* boa completude dos dados epidemiológicos e climáticos;
+* diferentes contextos climáticos e regionais;
+* variação suficiente na ocorrência das arboviroses para permitir a análise temporal;
+* condições adequadas para comparação entre diferentes contextos epidemiológicos.
 
-* menor incidência histórica acumulada em relação à média nacional;
-* aumento recente e perceptível da atividade epidemiológica nos últimos anos da série;
-* localização em região associada, pela literatura ou pelos indicadores do InfoDengue, à expansão recente da ocorrência da doença (ex. região Sul);
-* série histórica suficientemente longa (mínimo 8 anos) para permitir comparação entre períodos;
-* disponibilidade adequada de variáveis climáticas no mesmo período.
+Também serão considerados municípios de interesse epidemiológico que apresentem baixa atividade histórica e mudanças recentes na ocorrência das arboviroses. Quando pertinente, serão priorizados municípios localizados em regiões nas quais tenham sido descritas mudanças recentes na distribuição da ocorrência das doenças.
 
-### Demais critérios de seleção
+A seleção definitiva será realizada após a etapa exploratória dos dados.
 
-* disponibilidade e completude da série histórica;
-* representatividade climática (diferentes regiões/regimes térmicos);
-* disponibilidade de séries históricas suficientemente informativas para as doenças analisadas — não sendo exigida a presença simultânea das três doenças em todos os municípios, já que diferenças de ocorrência entre doenças também constituem uma característica relevante para a análise;
-* possibilidade de comparação entre diferentes contextos regionais.
-
-A seleção definitiva será realizada após a etapa exploratória da base de dados.
-
----
 
 # 6. Solução proposta
 
-O projeto é estruturado em três camadas com prioridades explícitas: **(i) núcleo científico** — detecção de mudanças na dinâmica temporal; **(ii) análise complementar** — associação com variáveis climáticas; **(iii) aplicação** — previsão de curto prazo. Essa hierarquia evita que o projeto seja lido apenas como "mais um projeto de previsão de dengue".
+O projeto propõe o desenvolvimento de um produto analítico baseado em séries temporais para caracterizar mudanças na dinâmica temporal de dengue, zika e chikungunya e investigar sua associação com a variação das condições climáticas. A solução integrará dados epidemiológicos e climáticos, aplicará métodos de análise de séries temporais e apresentará os resultados de forma organizada por município e arbovirose, permitindo a identificação de padrões sazonais, tendências e possíveis mudanças ao longo da série histórica.
 
 ## 6.1 Etapa 1 — Coleta e preparação dos dados
 
@@ -261,42 +248,39 @@ Não será utilizado LSTM nem qualquer modelo adicional além dos dois definidos
 
 ---
 
-# 7. Avaliação dos modelos
+# 7. Avaliação dos resultados
 
-A comparação entre SARIMAX e XGBoost será realizada por meio de **validação temporal em janela expansiva (*walk-forward validation*)**, e não apenas uma única divisão treino/teste, evitando vazamento de informações futuras para o treinamento.
+Caso a etapa preditiva seja implementada, SARIMAX e XGBoost serão comparados por meio de **validação temporal em janela expansiva (*walk-forward validation*)**, utilizando apenas informações disponíveis até cada momento da previsão (HYNDMAN; ATHANASOPOULOS, 2021).
 
-Métricas de avaliação:
+As métricas principais serão **MAE** e **RMSE**, com **sMAPE** como medida complementar (HYNDMAN; ATHANASOPOULOS, 2021).
 
-* **Principais**: MAE e RMSE.
-* **Opcional**: sMAPE, preferido a MAPE tradicional por lidar melhor com semanas de incidência baixa ou igual a zero, comuns nas séries analisadas.
+Os pontos de mudança identificados pelo PELT serão avaliados com base nos critérios do método e quanto à estabilidade e plausibilidade temporal, considerando, quando disponíveis, informações epidemiológicas e literatura sobre os períodos analisados (KILLICK; FEARNHEAD; ECKLEY, 2012).
 
-A etapa de detecção de pontos de mudança (Seção 6.2) será avaliada por meio de critérios estatísticos próprios do método PELT (ex. significância da quebra estrutural identificada) e por checagem de plausibilidade em relação a relatos da literatura ou de boletins epidemiológicos oficiais sobre o mesmo município/período, quando disponíveis.
-
----
+A interpretação dos resultados será restrita à identificação de padrões e associações, sem atribuição automática de causalidade.
 
 # 8. Detecção de comportamentos atípicos
 
-Uma semana será considerada potencialmente atípica quando o erro de previsão do modelo ultrapassar um limite baseado na distribuição histórica dos resíduos ou no intervalo de previsão do modelo estatístico.
+Serão identificadas semanas com comportamento epidemiológico atípico em relação ao padrão esperado da série, utilizando os resíduos ou intervalos de previsão, caso a etapa preditiva seja implementada.
 
-O objetivo não será classificar automaticamente uma situação como "surto", mas identificar **comportamentos epidemiológicos atípicos** que possam merecer atenção em análises posteriores.
+O objetivo será sinalizar padrões que possam merecer investigação posterior, sem classificá-los automaticamente como surtos ou estabelecer causalidade.
 
 ---
 
 # 9. Limitações previstas
 
-O projeto reconhece, desde a fase de concepção, as seguintes limitações:
+O projeto reconhece as seguintes limitações:
 
-* caráter observacional dos dados, que impossibilita inferir causalidade entre variáveis climáticas e dinâmica epidemiológica;
+* caráter observacional dos dados, que limita a inferência de causalidade entre variáveis climáticas e dinâmica epidemiológica;
 * subnotificação de casos, especialmente em municípios menores;
-* possíveis alterações no próprio sistema de vigilância ao longo do tempo (mudanças de critério diagnóstico, cobertura de testagem);
-* mudanças demográficas na população dos municípios ao longo do período analisado;
-* ausência, na base utilizada, de variáveis socioambientais relevantes (ex. saneamento, urbanização, cobertura de controle vetorial);
+* possíveis mudanças no sistema de vigilância ao longo do período, incluindo critérios diagnósticos e cobertura de testagem;
+* mudanças demográficas nos municípios analisados;
+* ausência de variáveis socioambientais relevantes, como saneamento, urbanização e ações de controle vetorial;
 * diferenças na qualidade e completude dos dados entre municípios;
-* número limitado de municípios analisados, sem pretensão de representatividade estatística nacional;
-* possível instabilidade dos indicadores para doenças com baixa incidência histórica (zika e chikungunya em alguns municípios);
-* revisões retrospectivas de `casos_est` pelo sistema de nowcasting, que podem alterar valores já analisados.
+* número limitado de municípios, sem pretensão de representatividade estatística nacional;
+* possível instabilidade dos indicadores em séries com baixa incidência, especialmente para zika e chikungunya;
+* revisões retrospectivas dos valores de `casos_est` decorrentes do processo de *nowcasting*.
 
-As associações identificadas serão interpretadas considerando que fatores não incluídos na base — como mobilidade populacional, imunidade de rebanho, ações de controle vetorial e mudanças na vigilância — também podem influenciar a dinâmica das arboviroses.
+As associações identificadas serão interpretadas considerando a possível influência de fatores não contemplados na base, como mobilidade populacional, imunidade da população, ações de controle vetorial e mudanças nos sistemas de vigilância.
 
 ---
 
@@ -304,58 +288,50 @@ As associações identificadas serão interpretadas considerando que fatores nã
 
 O projeto será considerado concluído quando:
 
-* pelo menos 3 municípios tiverem sido analisados;
-* as três doenças tiverem sido avaliadas nos municípios em que houver dados suficientes;
-* as séries e análises forem reprodutíveis a partir do código disponibilizado;
-* o método PELT tiver sido aplicado às séries dessazonalizadas selecionadas;
-* os indicadores de início, duração e intensidade de temporada tiverem sido calculados;
-* SARIMAX e XGBoost tiverem sido comparados por meio de validação temporal;
-* o painel analítico estiver funcional para os municípios selecionados;
+* pelo menos 3 municípios selecionados apresentarem séries adequadas para análise;
+* as séries disponíveis de dengue, zika e chikungunya forem avaliadas conforme sua completude e qualidade;
+* os indicadores de início, duração e intensidade das temporadas forem calculados;
+* o método PELT for aplicado às séries selecionadas, quando tecnicamente adequado;
+* forem investigadas as associações temporais entre os padrões epidemiológicos identificados e as variáveis climáticas;
+* as análises forem reproduzíveis a partir do código disponibilizado;
+* o painel analítico apresentar os principais resultados para os municípios selecionados;
 * código-fonte e documentação estiverem disponíveis publicamente no GitHub.
 
 ---
 
 # 11. Produto final
 
+# 11. Produto final
+
 O produto final será um **painel analítico interativo**, organizado nas seguintes abas:
 
-* **Aba 1 — Visão geral**: indicadores principais (o que mudou, quando mudou, se há associação com o clima, e o que se espera para as próximas semanas), priorizados na tela inicial em vez de detalhes estatísticos completos.
-* **Aba 2 — Histórico**: casos e incidência ao longo do tempo.
-* **Aba 3 — Sazonalidade**: decomposição em tendência e sazonalidade, indicadores de início/pico/fim/duração/intensidade.
-* **Aba 4 — Mudanças**: pontos de mudança identificados (changepoints), com uma camada resumida ("mudança detectada em torno de determinado ano") e uma camada técnica detalhada (método PELT, parâmetros e critérios utilizados), separadas para preservar a usabilidade da visão executiva.
-* **Aba 5 — Clima**: temperatura e precipitação associadas, incluindo as defasagens testadas.
-* **Aba 6 — Previsão**: resultados de SARIMAX e XGBoost para o horizonte de 1 a 4 semanas.
-* **Aba 7 — Anomalias**: semanas com desvio em relação ao padrão esperado.
+* **Aba 1 — Visão geral:** principais resultados da análise, incluindo indicadores de sazonalidade, mudanças identificadas e associações com variáveis climáticas.
 
-O código-fonte, documentação e instruções para reprodução serão disponibilizados em repositório público no GitHub.
+* **Aba 2 — Histórico:** evolução semanal da incidência estimada de dengue, zika e chikungunya ao longo da série histórica.
 
----
+* **Aba 3 — Sazonalidade:** indicadores de início, pico, fim, duração e intensidade das temporadas, além da decomposição das séries em tendência, sazonalidade e resíduo.
 
-# 12. Relação com o doutorado
+* **Aba 4 — Mudanças:** pontos de mudança identificados nas séries, com apresentação simplificada dos resultados e acesso aos principais parâmetros do método utilizado.
 
-O projeto apresenta uma **relação conceitual e temática** — e não uma relação metodológica direta — com a linha de pesquisa de doutorado sobre vulnerabilidade de Diptera às mudanças climáticas.
-
-Enquanto o doutorado aborda uma perspectiva mais ampla, envolvendo distribuição geográfica, filogenia, traços funcionais e modelagem hierárquica de comunidades para cinco famílias de Diptera a partir de registros de ocorrência, filogenias datadas e projeções climáticas do CMIP6, o presente projeto concentra-se em um recorte aplicado e temporal:
-
-**Diptera (Culicidae) → múltiplos patógenos com sensibilidade térmica mecanisticamente distinta → dinâmica epidemiológica → possíveis mudanças temporais → associação (não causal) com variáveis climáticas.**
-
-O paralelo conceitual reside na ideia comum aos dois projetos de que características biológicas (traços funcionais de uma espécie, no doutorado; sensibilidade térmica de um patógeno, neste projeto) podem estar associadas a diferentes respostas a um clima em transformação. O **Projeto Aplicado IV não constitui uma etapa metodológica do doutorado** — é um projeto independente, inspirado por uma pergunta relacionada, que utiliza dados, métodos e escopo adequados aos requisitos e ao prazo da disciplina.
+* **Aba 5 — Clima:** evolução das variáveis climáticas selecionadas e sua relação temporal com os padrões epidemiológicos, incluindo as defasagens analisadas.
 
 ---
 
-# 13. Caráter extensionista
+# 12. Caráter extensionista
 
-Serão disponibilizados publicamente:
+O projeto terá caráter extensionista por meio da disponibilização pública de:
 
 * código-fonte e documentação;
-* metodologia e instruções de reprodução;
-* resultados, incluindo os indicadores de sazonalidade e os pontos de mudança identificados por município e doença;
+* metodologia e instruções para reprodução das análises;
+* resultados obtidos nas séries analisadas;
 * painel analítico, quando tecnicamente viável;
-* instruções para obtenção dos dados nas fontes oficiais.
+* orientações para obtenção dos dados nas fontes oficiais.
+
+A disponibilização desses materiais permitirá que estudantes, pesquisadores e profissionais interessados consultem, reproduzam e explorem as análises desenvolvidas no projeto.
 
 ---
 
-# 14. Referências
+# 13. Referências
 
 ## Referências
 
@@ -401,14 +377,13 @@ WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data manageme
 
 # 15. Próximas etapas
 
-**Fase 1 — Dados**: acesso à API do InfoDengue para as três doenças; avaliação de qualidade e completude; seleção dos municípios (incluindo ao menos um sentinela).
+**Fase 1 — Dados:** acesso à API do InfoDengue; avaliação da qualidade e completude das séries; seleção dos municípios.
 
-**Fase 2 — Séries**: construção das séries temporais; decomposição em tendência/sazonalidade (STL); cálculo dos indicadores de início/pico/fim/duração/intensidade da temporada.
+**Fase 2 — Séries temporais:** construção das séries; decomposição em tendência, sazonalidade e resíduo; cálculo dos indicadores de início, pico, fim, duração e intensidade das temporadas.
 
-**Fase 3 — Mudanças**: aplicação do método PELT sobre as séries dessazonalizadas; identificação e validação de plausibilidade dos pontos de mudança.
+**Fase 3 — Mudanças:** aplicação do método PELT às séries selecionadas e análise dos pontos de mudança identificados.
 
-**Fase 4 — Clima**: seleção de variáveis climáticas prioritárias (temperatura, precipitação); teste de defasagens (0–4 semanas, com possível extensão); avaliação de associação temporal com as mudanças identificadas na Fase 3.
+**Fase 4 — Clima:** seleção das variáveis climáticas; definição das defasagens; análise da associação temporal entre as condições climáticas e os padrões epidemiológicos identificados.
 
-**Fase 5 — Previsão**: implementação de SARIMAX e XGBoost; validação temporal em janela expansiva; comparação de desempenho (MAE, RMSE, sMAPE); definição do mecanismo de detecção de anomalias.
+**Fase 5 — Produto:** desenvolvimento do painel analítico; organização da documentação; disponibilização do código e dos resultados no GitHub.
 
-**Fase 6 — Produto**: construção do painel analítico (7 abas); documentação; disponibilização do código e dos dados no GitHub.
