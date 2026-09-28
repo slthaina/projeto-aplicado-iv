@@ -31,30 +31,33 @@ graph TD
     B --> C[Tratamento e integração]
     C --> D[Seleção dos municípios]
     D --> E[Base analítica integrada]
-    
-    E --> F[Análise das séries]
-    E --> G[Modelagem preditiva]
-    
-    subgraph Análise
-        F --> F1[STL]
-        F1 --> F2[Indicadores de temporada]
-        F2 --> F3[Comparação entre janelas]
-        F3 --> F4[PELT]
-        F4 --> F5[Pontos de mudança]
-        F5 --> F6[Associação temporal com o clima]
-        F6 --> F7[Defasagens climáticas]
+
+    E --> F1
+    E --> G1
+
+    subgraph Analise["Análise das séries"]
+        direction TD
+        F1[Análise das séries] --> F2[STL]
+        F2 --> F3[Indicadores de temporada]
+        F3 --> F4[Comparação entre janelas]
+        F4 --> F5[PELT]
+        F5 --> F6[Pontos de mudança]
+        F6 --> F7[Associação temporal com o clima]
+        F7 --> F8[Defasagens climáticas]
     end
-    
-    subgraph Modelagem
-        G --> G1[SARIMAX + XGBoost]
-        G1 --> G2[Walk-forward]
-        G2 --> G3[Previsão 1–4 sem.]
-        G3 --> G4[Semanas atípicas]
+
+    subgraph Modelagem["Modelagem preditiva"]
+        direction TD
+        G1[Modelagem preditiva] --> G2[SARIMAX + XGBoost]
+        G2 --> G3[Walk-forward]
+        G3 --> G4[Previsão 1–4 sem.]
+        G4 --> G5[Semanas atípicas]
     end
-    
-    F7 --> H[Resultados consolidados]
-    G4 --> H
-    
+
+    F8 --> H[Resultados consolidados]
+    G5 --> H
+
     H --> I[Painel]
     H --> J[Repositório GitHub]
+```
 ```
