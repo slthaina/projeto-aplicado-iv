@@ -60,4 +60,3 @@ graph TD
     H --> I[Painel]
     H --> J[Repositório GitHub]
 ```
-```
