@@ -8,15 +8,15 @@ A solução compreende etapas de coleta e tratamento dos dados, análise das sé
 
 | Etapa | Função | Saída |
 |---|---|---|
-| **1. Entrada** | Definir municípios candidatos (código IBGE), doenças, período e parâmetros analíticos, como limiar P75, mínimo de semanas consecutivas, penalidade do PELT e defasagens. | Arquivo de configuração |
-| **2. Coleta** | Consultar a API do InfoDengue para dengue, zika e chikungunya e, quando houver lacunas ou inconsistências relevantes, consultar dados do INMET. | Dados brutos por município e doença |
-| **3. Tratamento** | Auditar a completude, diferenciar valores zero de dados ausentes, padronizar a semana epidemiológica, interpolar somente variáveis climáticas, calcular incidência, integrar os dados epidemiológicos e climáticos e criar as defasagens. **Nesta etapa ocorre a seleção final dos municípios.** | Base analítica integrada e relatório de completude |
-| **4. Análise das séries** | Aplicar decomposição STL, calcular indicadores de temporada, comparar janelas temporais e aplicar o PELT para identificação de possíveis pontos de mudança. | Indicadores de temporada e pontos de mudança |
-| **5. Associação com o clima** | Avaliar a relação temporal entre as mudanças observadas nas séries epidemiológicas e as variáveis climáticas, considerando diferentes defasagens. | Resultados das associações entre clima e casos |
-| **6. Modelagem preditiva** | Aplicar SARIMAX e XGBoost para previsão de 1 a 4 semanas, utilizando validação *walk-forward*. | Previsões e métricas de desempenho |
-| **7. Identificação de semanas atípicas** | Identificar semanas atípicas a partir dos resíduos dos modelos ou dos intervalos de previsão. | Lista de semanas atípicas |
-| **8. Resultados** | Consolidar indicadores, pontos de mudança, associações climáticas, previsões, métricas (MAE, RMSE e sMAPE) e semanas atípicas. | Tabelas e gráficos finais |
-| **9. Apresentação** | Organizar os resultados em um painel interativo, com seleção de município e doença, e documentar o projeto no GitHub. | Painel e repositório |
+| **1. Entrada** | Definir municípios, doenças, período e parâmetros. | Configuração |
+| **2. Coleta** | Coletar dados do InfoDengue e INMET. | Dados brutos |
+| **3. Tratamento** | Verificar, padronizar e integrar os dados; selecionar os municípios. | Base integrada |
+| **4. Análise das séries** | Aplicar STL, indicadores de temporada e PELT. | Indicadores e pontos de mudança |
+| **5. Associação com o clima** | Avaliar relações temporais entre clima e casos, considerando defasagens. | Associações clima-casos |
+| **6. Modelagem preditiva** | Aplicar SARIMAX e XGBoost com validação *walk-forward*. | Previsões e métricas |
+| **7. Semanas atípicas** | Identificar semanas atípicas pelos modelos. | Semanas atípicas |
+| **8. Resultados** | Consolidar análises, previsões e métricas. | Tabelas e gráficos |
+| **9. Apresentação** | Organizar resultados no painel e GitHub. | Painel e repositório |
 
 ## Fluxo de análise
 
@@ -25,38 +25,34 @@ As etapas 1 a 3 gerarão a base analítica integrada. A partir dela, serão real
 Paralelamente, SARIMAX e XGBoost serão utilizados para previsões de 1 a 4 semanas, com validação *walk-forward*. Os resultados incluirão indicadores de temporada, pontos de mudança, associações climáticas, previsões e semanas atípicas, posteriormente consolidados no painel interativo.
 
 ## Fluxo da solução
-```mermaid
 graph TD
     A[Parâmetros + municípios candidatos] --> B[Coleta: InfoDengue + INMET]
     B --> C[Tratamento e integração]
     C --> D[Seleção dos municípios]
     D --> E[Base analítica integrada]
-
-    E --> F1
-    E --> G1
-
-    subgraph Analise["Análise das séries"]
-        direction TD
-        F1[Análise das séries] --> F2[STL]
-        F2 --> F3[Indicadores de temporada]
-        F3 --> F4[Comparação entre janelas]
-        F4 --> F5[PELT]
-        F5 --> F6[Pontos de mudança]
-        F6 --> F7[Associação temporal com o clima]
-        F7 --> F8[Defasagens climáticas]
+    
+    E --> F[Análise das séries]
+    E --> G[Modelagem preditiva]
+    
+    subgraph Análise
+        F --> F1[STL]
+        F1 --> F2[Indicadores de temporada]
+        F2 --> F3[Comparação entre janelas]
+        F3 --> F4[PELT]
+        F4 --> F5[Pontos de mudança]
+        F5 --> F6[Associação temporal com o clima]
+        F6 --> F7[Defasagens climáticas]
     end
-
-    subgraph Modelagem["Modelagem preditiva"]
-        direction TD
-        G1[Modelagem preditiva] --> G2[SARIMAX + XGBoost]
-        G2 --> G3[Walk-forward]
-        G3 --> G4[Previsão 1–4 sem.]
-        G4 --> G5[Semanas atípicas]
+    
+    subgraph Modelagem
+        G --> G1[SARIMAX + XGBoost]
+        G1 --> G2[Walk-forward]
+        G2 --> G3[Previsão 1–4 sem.]
+        G3 --> G4[Semanas atípicas]
     end
-
-    F8 --> H[Resultados consolidados]
-    G5 --> H
-
+    
+    F7 --> H[Resultados consolidados]
+    G4 --> H
+    
     H --> I[Painel]
     H --> J[Repositório GitHub]
-```
