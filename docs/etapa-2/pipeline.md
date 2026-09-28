@@ -31,10 +31,10 @@ graph TD
     B --> C[Tratamento e integração]
     C --> D[Seleção dos municípios]
     D --> E[Base analítica integrada]
-
+    
     E --> F[Análise das séries]
     E --> G[Modelagem preditiva]
-
+    
     subgraph Análise
         F --> F1[STL]
         F1 --> F2[Indicadores de temporada]
@@ -44,17 +44,17 @@ graph TD
         F5 --> F6[Associação temporal com o clima]
         F6 --> F7[Defasagens climáticas]
     end
-
+    
     subgraph Modelagem
         G --> G1[SARIMAX + XGBoost]
         G1 --> G2[Walk-forward]
         G2 --> G3[Previsão 1–4 sem.]
         G3 --> G4[Semanas atípicas]
     end
-
+    
     F7 --> H[Resultados consolidados]
     G4 --> H
-
+    
     H --> I[Painel]
     H --> J[Repositório GitHub]
 ```
