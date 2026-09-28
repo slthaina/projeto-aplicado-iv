@@ -25,16 +25,16 @@ As etapas 1 a 3 gerarão a base analítica integrada. A partir dela, serão real
 Paralelamente, SARIMAX e XGBoost serão utilizados para previsões de 1 a 4 semanas, com validação *walk-forward*. Os resultados incluirão indicadores de temporada, pontos de mudança, associações climáticas, previsões e semanas atípicas, posteriormente consolidados no painel interativo.
 
 ## Fluxo da solução
-
+```mermaid
 graph TD
     A[Parâmetros + municípios candidatos] --> B[Coleta: InfoDengue + INMET]
     B --> C[Tratamento e integração]
     C --> D[Seleção dos municípios]
     D --> E[Base analítica integrada]
-    
+
     E --> F[Análise das séries]
     E --> G[Modelagem preditiva]
-    
+
     subgraph Análise
         F --> F1[STL]
         F1 --> F2[Indicadores de temporada]
@@ -44,16 +44,17 @@ graph TD
         F5 --> F6[Associação temporal com o clima]
         F6 --> F7[Defasagens climáticas]
     end
-    
+
     subgraph Modelagem
         G --> G1[SARIMAX + XGBoost]
         G1 --> G2[Walk-forward]
         G2 --> G3[Previsão 1–4 sem.]
         G3 --> G4[Semanas atípicas]
     end
-    
+
     F7 --> H[Resultados consolidados]
     G4 --> H
-    
+
     H --> I[Painel]
     H --> J[Repositório GitHub]
+```
