@@ -26,55 +26,34 @@ Paralelamente, SARIMAX e XGBoost serão utilizados para previsões de 1 a 4 sema
 
 ## Fluxo da solução
 
-```text
-[Parâmetros + municípios candidatos]
-              ↓
-[API InfoDengue: dengue | zika | chikungunya]
-              │
-              └── (lacunas/inconsistências) ──► [INMET]
-              ↓
-[Tratamento dos dados]
-completude → zero × ausente → semana epidemiológica
-→ incidência → integração → defasagens
-              ↓
-      ◇ Seleção final dos municípios
-              ↓
-     [Base analítica integrada]
-              │
-      ┌───────┴────────┐
-      ↓                ↓
-    [STL]        [Variáveis climáticas]
-      ↓                │
-[Indicadores de        │
- temporada]            │
-      ↓                │
-[Comparação entre      │
- janelas temporais]    │
-      ↓                │
-[PELT na série         │
- dessazonalizada]      │
-      ↓                │
-[Momento da mudança]   │
-      │                │
-      └───────┬────────┘
-              ↓
-[Associação temporal com o clima
-       + diferentes defasagens]
-              │
-              │
-              ├───────────────┐
-              ↓               ↓
-        [SARIMAX]          [XGBoost]
-              └───────┬───────┘
-                      ↓
-            [Walk-forward]
-                      ↓
-             [Previsão 1–4 sem.]
-                      ↓
-             [Semanas atípicas]
-                      ↓
-          [Resultados consolidados]
-                      ↓
-       ┌──────────────┴──────────────┐
-       ↓                             ↓
-[Painel interativo]              [GitHub]
+graph TD
+    A[Parâmetros + municípios candidatos] --> B[Coleta: InfoDengue + INMET]
+    B --> C[Tratamento e integração]
+    C --> D[Seleção dos municípios]
+    D --> E[Base analítica integrada]
+    
+    E --> F[Análise das séries]
+    E --> G[Modelagem preditiva]
+    
+    subgraph Análise
+        F --> F1[STL]
+        F1 --> F2[Indicadores de temporada]
+        F2 --> F3[Comparação entre janelas]
+        F3 --> F4[PELT]
+        F4 --> F5[Pontos de mudança]
+        F5 --> F6[Associação temporal com o clima]
+        F6 --> F7[Defasagens climáticas]
+    end
+    
+    subgraph Modelagem
+        G --> G1[SARIMAX + XGBoost]
+        G1 --> G2[Walk-forward]
+        G2 --> G3[Previsão 1–4 sem.]
+        G3 --> G4[Semanas atípicas]
+    end
+    
+    F7 --> H[Resultados consolidados]
+    G4 --> H
+    
+    H --> I[Painel]
+    H --> J[Repositório GitHub]
