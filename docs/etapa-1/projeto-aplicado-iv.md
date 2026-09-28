@@ -310,8 +310,6 @@ A disponibilização desses materiais permitirá que estudantes, pesquisadores e
 
 # 13. Referências
 
-## Referências
-
 CHEN, T.; GUESTRIN, C. XGBoost: a scalable tree boosting system. In: **PROCEEDINGS OF THE 22ND ACM SIGKDD INTERNATIONAL CONFERENCE ON KNOWLEDGE DISCOVERY AND DATA MINING**, 2016. p. 785-794.
 
 CLEVELAND, R. B.; CLEVELAND, W. S.; MCRAE, J. E.; TERPENNING, I. STL: a seasonal-trend decomposition procedure based on loess. **Journal of Official Statistics**, v. 6, n. 1, p. 3-73, 1990.
