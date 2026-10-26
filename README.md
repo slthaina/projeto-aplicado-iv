@@ -42,7 +42,7 @@ Também está previsto o desenvolvimento de um painel analítico interativo para
 
 A documentação do projeto está reunida em um único notebook, que apresenta a proposta, o referencial teórico, as decisões metodológicas, o planejamento, os procedimentos realizados, os resultados e as limitações identificadas.
 
-**[Acessar a documentação completa do projeto](./PROJETO_APLICADO_IV.ipynb)**
+**[Acessar a documentação completa do projeto](./PROJETO_APLICADO_IV_ETAPA3.ipynb)**
 
 ## Autoria
 
